@@ -689,8 +689,13 @@ def method_block(function):
 def cond_swap(x, y, key_indices=None):
     from .types import SubMultiArray
     if isinstance(x, (Array, SubMultiArray)):
-        assert len(key_indices) == 1
-        b = x[key_indices[0]] > y[key_indices[0]]
+        # assert len(key_indices) == 1
+        if len(key_indices) == 2:
+            b = (x[key_indices[0]] > y[key_indices[0]]).bit_or(
+                ((x[key_indices[0]] == y[key_indices[0]]) & ((x[key_indices[1]] > y[key_indices[1]])))
+            )
+        else:
+            b = x[key_indices[0]] > y[key_indices[0]]
         return list(zip(*[b.cond_swap(xx, yy) for xx, yy in zip(x, y)]))
     b = x < y
     if isinstance(x, sfloat):
