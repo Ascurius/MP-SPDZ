@@ -7094,9 +7094,9 @@ class SubMultiArray(_vectorizable):
         """
         if key_indices is None:
             key_indices = (0,) * (len(self.sizes) - 1)
-        if len(key_indices) != len(self.sizes) - 1:
-            raise CompilerError('length of key_indices has to be one less '
-                                'than the dimension')
+        # if len(key_indices) != len(self.sizes) - 1:
+        #     raise CompilerError('length of key_indices has to be one less '
+        #                         'than the dimension')
         if program.options.binary:
             assert len(self.sizes) == 2
             library.loopy_odd_even_merge_sort(self, key_indices=key_indices)
