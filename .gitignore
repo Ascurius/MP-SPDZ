@@ -123,3 +123,8 @@ _build/
 # temp doc files
 doc/readme.md
 doc/xml
+
+# python build 
+*.egg-info
+dist
+build
